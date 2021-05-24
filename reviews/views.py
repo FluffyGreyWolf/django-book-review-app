@@ -18,7 +18,7 @@ def book_list(request):
     return render(request, 'reviews/books_list.html', context)
 
 def welcome_view(request):
-    return render(request, 'base.html')
+    return render(request, 'reviews/base.html')
 
 def book_details(request, pk):
     book = get_object_or_404(Book, pk=pk)
