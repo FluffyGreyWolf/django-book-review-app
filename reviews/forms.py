@@ -1,6 +1,6 @@
 from django import forms
 from django.forms.fields import CharField, ChoiceField
-from .models import Publisher, Review
+from .models import Publisher, Review, Book
 
 CHOICES = (("title", "Title"), ("contributor", "Contributor"))
 
@@ -18,3 +18,8 @@ class ReviewForm(forms.ModelForm):
         model = Review
         exclude = ["date_editied", "book"]
         rating = forms.IntegerField(min_value=0, max_value=5)
+
+class BookMediaForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ["cover", "sample"]
