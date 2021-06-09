@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 import reviews.views
 
 urlpatterns = [
+    path('accounts/', include(('django.contrib.auth.urls', 'auth'), namespace='accounts')),
     path('admin/', admin_site.urls),
     path('', include('reviews.urls')),
 ]
