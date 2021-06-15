@@ -52,27 +52,37 @@ def book_detail(request, pk):
     return render(request, 'reviews/book_details.html', context)
 
 def book_search(request):
-    search_text = request.GET.get("search","")
+    search_text = request.GET.get("search", "")
+    search_history = request.session.get('search_history', [])
     form = SearchForm(request.GET)
     books = set()
-
     if form.is_valid() and form.cleaned_data["search"]:
         search = form.cleaned_data["search"]
         search_in = form.cleaned_data.get("search_in") or "title"
         if search_in == "title":
             books = Book.objects.filter(title__icontains=search)
         else:
-            fname_contributors = Contributor.objects.filter(first_names__icontains=search)
+            fname_contributors = \
+                Contributor.objects.filter(first_names__icontains=search)
 
             for contributor in fname_contributors:
                 for book in contributor.book_set.all():
                     books.add(book)
 
-            lname_contributors = Contributor.objects.filter(last_names__icontains=search)
+        lname_contributors = \
+            Contributor.objects.filter(last_names__icontains=search)
 
-            for contributor in lname_contributors:
-                for book in contributor.book_set.all():
-                    books.add(book)
+        for contributor in lname_contributors:
+            for book in contributor.book_set.all():
+                books.add(book)
+
+        if request.user.is_authenticated:
+            search_history.append([search_in, search])
+            request.session['search_history'] = search_history
+    elif search_history:
+        initial = dict(search=search_text,
+                       search_in=search_history[-1][0])
+        form = SearchForm(initial=initial)
 
     return render(request, "reviews/search-results.html", {"form": form, "search_text": search_text, "books": books})
 
