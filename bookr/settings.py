@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['0.0.0.0', '192.168.1.104', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'bookrAdmin.apps.BookrAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

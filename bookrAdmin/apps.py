@@ -1,6 +1,4 @@
-from django.apps import AppConfig
+from django.contrib.admin.apps import AdminConfig
 
-
-class BookradminConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'bookrAdmin'
+class BookrAdminConfig(AdminConfig):
+    default_site = 'bookrAdmin.admin.BookrAdmin'
