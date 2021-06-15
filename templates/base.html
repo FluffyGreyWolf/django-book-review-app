@@ -67,6 +67,11 @@
          <a class="text-success" href="/accounts/profile">{{ request.user }}</a>
         </li>
         {% endif %}
+        {% if user.is_staff %}
+        <li class="nav-link">
+         <a class="text-success" href="/admin/">Admin Panel</a>
+        </li>
+        {% endif %}
       </div>
     </nav>
     <div class="container-fluid">
