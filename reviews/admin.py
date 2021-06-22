@@ -1,16 +1,17 @@
-from django.contrib.admin import AdminSite
+from django.contrib import admin
 from reviews.models import Publisher, Contributor, Book, BookContributor, Review
 
-class BookrAdminSite(AdminSite):
-    title_header = 'Bookr Admin'
-    site_header = 'Bookr administration'
-    index_title = 'Bookr site admin'
+class BookAdmin(admin.ModelAdmin):
+    model = Book
+    list_display = ('title', 'isbn', 'get_publisher', 'publication_date')
+    search_fields = ['title', 'publisher__name']
 
-admin_site = BookrAdminSite(name='bookr')
+    def get_publisher(self, obj):
+        return obj.publisher.name
 
 # Register your models here.
-admin_site.register(Publisher)
-admin_site.register(Contributor)
-admin_site.register(Book)
-admin_site.register(BookContributor)
-admin_site.register(Review)
+admin.site.register(Publisher)
+admin.site.register(Contributor)
+admin.site.register(Book, BookAdmin)
+admin.site.register(BookContributor)
+admin.site.register(Review)
