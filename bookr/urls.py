@@ -23,6 +23,7 @@ import bookr.views
 urlpatterns = [
     path('accounts/', include(('django.contrib.auth.urls', 'auth'), namespace='accounts')),
     path('accounts/profile/', bookr.views.profile, name='profile'),
+    path('accounts/profile/reading_history', bookr.views.reading_history, name='reading_history'),
     path('admin/', admin.site.urls),
     path('', include('reviews.urls')),
 ]
