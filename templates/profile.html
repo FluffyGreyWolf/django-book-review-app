@@ -37,7 +37,7 @@
       <p>Viewed Books</p>
       <p>
       {% for book_id, book_title in request.session.viewed_books %}
-      <a href="/books/{{ book_id }}">{{ book_title }}</a><br>
+      <a href="/book/{{ book_id }}">{{ book_title }}</a><br>
       {% empty %}
             No recently viewed books found.
       {% endfor %}
