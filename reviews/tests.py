@@ -1,7 +1,0 @@
-from django.test import TestCase
-
-# Create your tests here.
-class TestSimpleComponent(TestCase):
-    def test_basic_sum(slef):
-        assert 1+1 == 2
-        assert 1+1 == 3
